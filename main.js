@@ -2,7 +2,7 @@
 // // ou
 // var inputsArray = [...inputs];
 
-let formulario = document.getElementById("form");
+let formulario = document.getElementById("contato");
 formulario.addEventListener("submit", (evento) => 
 {
     evento.preventDefault();
@@ -22,21 +22,24 @@ formulario.addEventListener("submit", (evento) =>
                 alert("Por gentileza, preencha o campo " + novosLabels[j].innerText);
             }
         }
-        if(novosLabels[0].innerText=== "Email")
+        if(novosLabels[0].innerText === "Email")
         {
-            let labelEmail= novosLabels[0];
             let campoEmail = novosInputs[0];
-            if(!validarEmail(campoEmail.value)) alert(novosLabels[0].innerText + " está inválido");
-            // if(!validarEmail(campoEmail.value))
-            // {
-            //     alert("Digite um email válido");
-            // }
+            if(!validarEmail(campoEmail.value)) alert(novosLabels[0].innerText + " está inválido pois não se encaixa na nomenclatura de um email válido");
+            
         }
+        if(novosLabels[0].innerText === "Password")
         {
-
+            let campoPassword = novosInputs[0];
+            if(!validarEmail(campoPassword.value)) alert(novosLabels[0].innerText + " está inválido pois a senha deve ter pelo menos 8 caracteres, conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial.");
         }
+        if(novosLabels[0].innerText === "Phone Number")
+        {
+            let campoTelefone = novosInputs[0];
+            if(!validarTelefone(campoTelefone.value)) alert(novosLabels[0].innerText + " está inválido Pois o DDD deve conter entre 2 ou mais dígitos, o número precisa ter entre 8 e 9 caracteres numéricos");
+        }
+        
     }
-    
 })
 
 function validarEmail(email)
@@ -50,6 +53,32 @@ function validarEmail(email)
     {
         return true;
     }
-        return false;
+    return false;
 
 }
+
+function validarSenha()
+{
+    const regexPassword = new RegExp 
+    (
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/
+    );
+    if(regexPassword.test(senha))
+    {
+        return true;
+    }
+    return false;
+}
+function validarTelefone(telefone)
+{
+    const regexTelefone = new RegExp 
+    (
+        /^(?:[1-9]{2}|[0-9]{3})[0-9]{8,9}$/
+    );
+    if(regexTelefone.test(telefone))
+    {
+        return true;
+    }
+    return false;
+}
+console.clear();
