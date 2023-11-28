@@ -2,41 +2,60 @@
 // // ou
 // var inputsArray = [...inputs];
 
-let formulario = document.getElementById("contato");
+const formulario = document.getElementById("contato");
 formulario.addEventListener("submit", (evento) => 
 {
     evento.preventDefault();
 
-    let divs = document.querySelectorAll(".div-formulario");
-    let novasDivs = [...divs];
+    const divs = document.querySelectorAll(".div-formulario");
+    const novasDivs = [...divs];
     for(let i = 0; i < novasDivs.length; i++)
     {
-        let inputs = novasDivs[i].getElementsByTagName("input");
-        let labels = novasDivs[i].getElementsByTagName("label");
-        let novosInputs = [...inputs];
-        let novosLabels = [...labels];
+        const inputs = novasDivs[i].getElementsByTagName("input");
+        const labels = novasDivs[i].getElementsByTagName("label");
+        const novosInputs = [...inputs];
+        const novosLabels = [...labels];
         for(let j = 0; j < novosInputs.length; j++)
         {
             if(novosInputs[j].value === "")
             {
+                novosInputs[j].classList.add("atencao");
                 alert("Por gentileza, preencha o campo " + novosLabels[j].innerText);
             }
         }
         if(novosLabels[0].innerText === "Email")
         {
-            let campoEmail = novosInputs[0];
-            if(!validarEmail(campoEmail.value)) alert(novosLabels[0].innerText + " está inválido pois não se encaixa na nomenclatura de um email válido");
+            const campoEmail = novosInputs[0];
+            if(!validarEmail(campoEmail.value))
+            {
+                campoEmail.classList.add("invalido");
+                const span = document.querySelector("#span-email");
+                span.classList.remove("d-none");
+                span.classList.add("d-inline");
+            }
             
         }
         if(novosLabels[0].innerText === "Password")
         {
-            let campoPassword = novosInputs[0];
-            if(!validarEmail(campoPassword.value)) alert(novosLabels[0].innerText + " está inválido pois a senha deve ter pelo menos 8 caracteres, conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial.");
+            const campoPassword = novosInputs[0];
+            if(!validarEmail(campoPassword.value))
+            {
+                campoPassword.classList.add("invalido");
+                const span = document.querySelector("#span-senha");
+                span.classList.remove("d-none");
+                span.classList.add("d-inline");
+            }
         }
         if(novosLabels[0].innerText === "Phone Number")
         {
-            let campoTelefone = novosInputs[0];
-            if(!validarTelefone(campoTelefone.value)) alert(novosLabels[0].innerText + " está inválido Pois o DDD deve conter entre 2 ou mais dígitos, o número precisa ter entre 8 e 9 caracteres numéricos");
+            const campoTelefone = novosInputs[0];
+            if(!validarTelefone(campoTelefone.value)) 
+            {
+                campoTelefone.classList.add("invalido");
+                const span = document.querySelector("#span-telefone");
+                span.classList.remove("d-none");
+                span.classList.add("d-inline");
+            }
         }
         
     }
